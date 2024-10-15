@@ -65,7 +65,11 @@ class FormStore {
    */
   getFieldsValue = (nameList: NamePath[] | true): { [key: NamePath]: any } => {
     if (typeof nameList === 'boolean') {
-      return JSON.parse(JSON.stringify(this.store))
+      try {
+        return JSON.parse(JSON.stringify(this.store))
+      } catch {
+        return {}
+      }
     }
     const fieldsValue: { [key: NamePath]: any } = {}
     nameList.forEach((field) => {
